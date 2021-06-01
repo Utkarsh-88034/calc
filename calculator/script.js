@@ -99,6 +99,19 @@ back.addEventListener("click", backspace)
 function equate(){
     let screen = document.getElementById("scr")
     let temp = screen.textContent
-    let answer = eval(temp)
-    screen.textContent = answer
+    if(temp[temp.length - 1] == "!"){
+        let num = temp.substr(0, temp.length-1)
+        var answer = String(factorial(num))
+    }
+    else{
+        var answer = String(eval(temp))
+    }
+    if(answer.length >= 13){
+        // answer = answer.substr(0,13)
+        screen.style.fontSize = "40px"
+        screen.textContent = answer
+    }else{
+        screen.textContent = answer
+    }
+    
 }
