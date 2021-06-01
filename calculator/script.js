@@ -1,36 +1,25 @@
-let one = document.getElementById("1")
-let two = document.getElementById("2")
-let three = document.getElementById("3")
-let four = document.getElementById("4")
-let five = document.getElementById("5")
-let six = document.getElementById("6")
-let seven = document.getElementById("7")
-let eight = document.getElementById("8")
-let nine = document.getElementById("9")
-let zero = document.getElementById("0")
-let back = document.getElementById("back")
-let div = document.getElementById("div")
-let mul = document.getElementById("mul")
-let sub = document.getElementById("sub")
-let add = document.getElementById("sum")
-let dot = document.getElementById("dot")
+
+let power = document.getElementById("pow")
+let ac = document.getElementById("ac")
 let equals = document.getElementById("equals")
 let on = document.getElementById("off")
-let power = document.getElementById("pow")
-let fact = document.getElementById("fact")
-let ac = document.getElementById("ac")
-
-
+let key = document.querySelectorAll(".key")
+let operators = document.querySelectorAll(".op")
+let back = document.getElementById("back")
 function press(){
     let screen = document.getElementById("scr")
-    if(this.textContent == "^"){
-        let text = "**"
-        screen.append(text)
+    let text = screen.textContent
+    if(text[text.length -1] != "!"){
+        if(this.textContent == "^"){
+            let text = "**"
+            screen.append(text)
+        }
+        else{
+            let text = this.textContent
+            screen.append(text)
+        }
     }
-    else{
-        let text = this.textContent
-        screen.append(text)
-    }
+    
     
 
 }
@@ -41,7 +30,7 @@ function backspace(){
     screen.textContent = text
 }
 function operator(){
-    let oplist = ["/","x","+","-"]
+    let oplist = ["/","*","+","-","^","!","."]
     let screen = document.getElementById("scr")
     let text = this.textContent
     let temp = screen.textContent
@@ -68,33 +57,27 @@ function onoff(){
     }
     
 }
+function factorial(x){
+    if (x==1){
+        return 1
+    }
+    else{
+        let result = x * factorial(x-1)
+        return result
+    }
+}
 
-
-one.addEventListener("click", press)
-two.addEventListener("click", press)
-three.addEventListener("click", press)
-four.addEventListener("click", press)
-five.addEventListener("click", press)
-six.addEventListener("click", press)
-seven.addEventListener("click", press)
-eight.addEventListener("click", press)
-nine.addEventListener("click", press)
-zero.addEventListener("click", press)
-power.addEventListener("click", press)
-fact.addEventListener("click", press)
-
+key.forEach(item =>{
+    item.addEventListener("click", press)
+})
+operators.forEach(item=>{
+    item.addEventListener("click", operator)
+})
 ac.addEventListener("click", AC)
 on.addEventListener("click", onoff)
-
-div.addEventListener("click", operator)
-mul.addEventListener("click", operator)
-add.addEventListener("click", operator)
-sub.addEventListener("click", operator)
-dot.addEventListener("click", operator)
-equals.addEventListener("click", equate)
-
-
 back.addEventListener("click", backspace)
+equals.addEventListener("click", equate)
+power.addEventListener("click", press)
 
 function equate(){
     let screen = document.getElementById("scr")
